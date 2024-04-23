@@ -52,9 +52,22 @@ app.get("/cv", async (req, res) => {
     res.json({ message: "API för arbetserfarenheter" });
 });
 
+// hitta innehåll
 app.get("/workexperiences", async (req, res) => {
     try {
         const result = await workExperience.find({});
+        return res.json(result);
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+});
+
+// hitta specifikt innehåll
+app.get("/workexperiences/:id", async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        const result = await workExperience.findById(id);
         return res.json(result);
     } catch (error) {
         return res.status(500).json(error);
