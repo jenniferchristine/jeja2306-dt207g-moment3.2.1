@@ -53,7 +53,7 @@ app.get("/cv", async (req, res) => {
 });
 
 // hitta innehåll
-app.get("/workexperiences", async (req, res) => {
+app.get("/cv/workexperiences", async (req, res) => {
     try {
         const result = await workExperience.find({});
         return res.json(result);
@@ -63,7 +63,7 @@ app.get("/workexperiences", async (req, res) => {
 });
 
 // hitta specifikt innehåll
-app.get("/workexperiences/:id", async (req, res) => {
+app.get("/cv/workexperiences/:id", async (req, res) => {
     const id = req.params.id;
 
     try {
@@ -85,7 +85,7 @@ app.post("/workexperiences", async (req, res) => {
 });
 
 // radera data
-app.delete("/workexperiences/:id", async (req, res) => {
+app.delete("/cv/workexperiences/:id", async (req, res) => {
     const id = req.params.id;
 
     try {
@@ -102,7 +102,7 @@ app.delete("/workexperiences/:id", async (req, res) => {
 
 
 // uppdatera befintlig
-app.put("/workexperiences/:id", async (req, res) => {
+app.put("/cv/workexperiences/:id", async (req, res) => {
     const id = req.params.id; // tar id frpn url och ger variabel
     const update = req.body; // tar uppdatering från body och ger variabel
 
