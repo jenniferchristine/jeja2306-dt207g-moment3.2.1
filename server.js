@@ -55,13 +55,13 @@ const schema = new mongoose.Schema({
     }
 });
 
-// inkludera till databas
-const workExperience = mongoose.model("Workexperience", schema);
-
 // routes
 app.get("/cv", async (req, res) => {
     res.json({ message: "API för arbetserfarenheter" });
 });
+
+// inkludera till databas
+const workExperience = mongoose.model("workexperiences", schema);
 
 // hitta innehåll
 app.get("/cv/workexperiences", async (req, res) => {
