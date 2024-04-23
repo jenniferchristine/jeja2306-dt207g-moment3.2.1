@@ -19,6 +19,31 @@ app.use(express.json());
     }
 })();
 
+// egenskaper för alla objekt
+const schema = new mongoose.Schema({
+    companyname: {
+        type: String, 
+        required: true,
+        trim: true
+    },
+    jobtitle: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    location: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    description: {
+        type: String,
+        required: true,
+        trim: true,
+        minlength: 10
+    }
+});
+
 // routes
 app.get("/cv", async (req, res) => {
     res.json({ message: "API för arbetserfarenheter" });
