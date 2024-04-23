@@ -23,22 +23,22 @@ app.use(express.json());
 const schema = new mongoose.Schema({
     companyname: {
         type: String, 
-        required: true,
+        required: [true, "Du måste ange arbetsgivare"],
         trim: true
     },
     jobtitle: {
         type: String,
-        required: true,
+        required: [true, "Du måste ange en arbetsroll"],
         trim: true
     },
     location: {
         type: String,
-        required: true,
+        required: [true, "Du måste ange vart du arbetade"],
         trim: true
     },
     description: {
         type: String,
-        required: true,
+        required: [true, "Du måste ange en beskrivning av ditt arbete"],
         trim: true,
         minlength: 10
     }
@@ -54,7 +54,7 @@ app.get("/cv", async (req, res) => {
 
 app.get("/workexperiences", async (req, res) => {
     try {
-        let result = await workExperience.find({});
+        const result = await workExperience.find({});
         return res.json(result);
     } catch (error) {
         return res.status(500).json(error);
@@ -64,7 +64,7 @@ app.get("/workexperiences", async (req, res) => {
 // lägga till data
 app.post("/workexperiences", async (req, res) => {
     try {
-        let result = await workExperience.create(req.body);
+        const result = await workExperience.create(req.body);
         return res.json(result);
     } catch (error) {
         return res.status(400).json(error);
