@@ -71,6 +71,40 @@ app.post("/workexperiences", async (req, res) => {
     }
 });
 
+// radera data
+app.delete("/workexperiences/:id", async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        const deleteData = await workExperience.findByIdAndDelete(id);
+        if (!deleteData) {
+            return res.status(404).json({ message: "Could not be deleted" });
+        }
+        res.json({ message: "Deleted succesfully", deleteData});
+    } catch (error) {
+        console.error("Error when deleting", error);
+        res.status(500).json({ message: "Error when deleting", error });
+    }
+});
+
+
+// uppdatera befintlig
+app.put("/workexperiences/:id", async (req, res) => {
+    const id = req.params.id; // tar id frpn url och ger variabel
+    const update = req.body; // tar uppdatering från body och ger variabel
+
+    try {
+        const result = await workExperience.findByIdAndUpdate(id, update, { new: true }); // returnen blir det uppdaterade
+        if (!result) {
+            return res.status(404).json({ message: "Could not update data" });
+        }
+        res.json({ message: "Updated succesfully", result});
+    } catch (error) {
+        console.error("Error when updating", error);
+        res.status(500).json({ message: "Error when updating", error });
+    }
+});
+
 // starta server
 app.listen(port, () => {
     console.log("Server is running on port: " + port);
