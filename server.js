@@ -16,10 +16,10 @@ app.use(express.json());
         console.log("Connected to MongoDB...");
         /*
         const newExperience = new workExperience({
-            companyname: "Testing", 
-            jobtitle: "Testing", 
-            location: "Testing", 
-            description: "Testing testing"
+            companyname: "Blablablabla", 
+            jobtitle: "Blablablabla", 
+            location: "Blablablabla", 
+            description: "Blablablabla"
         });
 
         await newExperience.save();
