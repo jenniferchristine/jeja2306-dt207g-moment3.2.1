@@ -12,8 +12,19 @@ app.use(express.json());
 // självkörande funktion för att hantera anslutning
 (async () => {
     try {
-        await mongoose.connect("mongodb://localhost:27017/cv");
+        await mongoose.connect("mongodb+srv://jeja2306:Vj5CmU06Op3zINNT@jeja2306-dt207g-moment3.x7zbafc.mongodb.net/cv");
         console.log("Connected to MongoDB...");
+        /*
+        const newExperience = new workExperience({
+            companyname: "Testing", 
+            jobtitle: "Testing", 
+            location: "Testing", 
+            description: "Testing testing"
+        });
+
+        await newExperience.save();
+        console.log("Insert successful");
+        */
     } catch (error) {
         console.error("Error when connecting to the database:", error);
     }
@@ -99,7 +110,6 @@ app.delete("/workexperiences/:id", async (req, res) => {
         res.status(500).json({ message: "Error when deleting", error });
     }
 });
-
 
 // uppdatera befintlig
 app.put("/workexperiences/:id", async (req, res) => {
