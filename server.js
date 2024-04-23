@@ -44,9 +44,31 @@ const schema = new mongoose.Schema({
     }
 });
 
+// inkludera till databas
+const workExperience = mongoose.model("Workexperience", schema);
+
 // routes
 app.get("/cv", async (req, res) => {
     res.json({ message: "API för arbetserfarenheter" });
+});
+
+app.get("/workexperiences", async (req, res) => {
+    try {
+        let result = await workExperience.find({});
+        return res.json(result);
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+});
+
+// lägga till data
+app.post("/workexperiences", async (req, res) => {
+    try {
+        let result = await workExperience.create(req.body);
+        return res.json(result);
+    } catch (error) {
+        return res.status(400).json(error);
+    }
 });
 
 // starta server
