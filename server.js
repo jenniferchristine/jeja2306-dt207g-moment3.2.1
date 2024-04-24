@@ -12,20 +12,20 @@ app.use(express.json());
 // självkörande funktion för att hantera anslutning
 (async () => {
     try {
-        await mongoose.connect("mongodb+srv://jeja2306:Vj5CmU06Op3zINNT@jeja2306-dt207g-moment3.x7zbafc.mongodb.net/cv?retryWrites=true&w=majority&appName=jeja2306-dt207g-moment3-2-1");
+        await mongoose.connect("mongodb+srv://jeja2306:Vj5CmU06Op3zINNT@jeja.t13agrm.mongodb.net/");
         //await mongoose.connect("mongodb+srv://jeja2306:Vj5CmU06Op3zINNT@jeja2306-dt207g-moment3.x7zbafc.mongodb.net/cv");
         console.log("Connected to MongoDB...");
-        /*
+        
         const newExperience = new workExperience({
-            companyname: "Connect to moongose", 
-            jobtitle: "Connect to moongose", 
-            location: "Connect to moongose", 
-            description: "Connect to moongose"
+            companyname: "test db two", 
+            jobtitle: "test db two", 
+            location: "test db two", 
+            description: "test db two"
         });
 
         await newExperience.save();
         console.log("Insert successful");
-        */
+        
     } catch (error) {
         console.error("Error when connecting to the database:", error);
     }
