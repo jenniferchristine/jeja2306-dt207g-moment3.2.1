@@ -12,19 +12,20 @@ app.use(express.json());
 // självkörande funktion för att hantera anslutning
 (async () => {
     try {
-        await mongoose.connect("mongodb+srv://jeja2306:Vj5CmU06Op3zINNT@jeja2306-dt207g-moment3.x7zbafc.mongodb.net/cv");
+        await mongoose.connect("mongodb+srv://jeja2306:Vj5CmU06Op3zINNT@jeja2306-dt207g-moment3.x7zbafc.mongodb.net/cv?retryWrites=true&w=majority&appName=jeja2306-dt207g-moment3-2-1");
+        //await mongoose.connect("mongodb+srv://jeja2306:Vj5CmU06Op3zINNT@jeja2306-dt207g-moment3.x7zbafc.mongodb.net/cv");
         console.log("Connected to MongoDB...");
-        /*
+        
         const newExperience = new workExperience({
-            companyname: "Blablablabla", 
-            jobtitle: "Blablablabla", 
-            location: "Blablablabla", 
-            description: "Blablablabla"
+            companyname: "Connect to moongose", 
+            jobtitle: "Connect to moongose", 
+            location: "Connect to moongose", 
+            description: "Connect to moongose"
         });
 
         await newExperience.save();
         console.log("Insert successful");
-        */
+        
     } catch (error) {
         console.error("Error when connecting to the database:", error);
     }
@@ -86,7 +87,7 @@ app.get("/cv/workexperiences/:id", async (req, res) => {
 });
 
 // lägga till data
-app.post("/workexperiences", async (req, res) => {
+app.post("/cv/workexperiences", async (req, res) => {
     try {
         const result = await workExperience.create(req.body);
         return res.json(result);
