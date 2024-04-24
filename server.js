@@ -15,7 +15,7 @@ app.use(express.json());
         await mongoose.connect("mongodb+srv://jeja2306:Vj5CmU06Op3zINNT@jeja2306-dt207g-moment3.x7zbafc.mongodb.net/cv?retryWrites=true&w=majority&appName=jeja2306-dt207g-moment3-2-1");
         //await mongoose.connect("mongodb+srv://jeja2306:Vj5CmU06Op3zINNT@jeja2306-dt207g-moment3.x7zbafc.mongodb.net/cv");
         console.log("Connected to MongoDB...");
-        
+        /*
         const newExperience = new workExperience({
             companyname: "Connect to moongose", 
             jobtitle: "Connect to moongose", 
@@ -25,7 +25,7 @@ app.use(express.json());
 
         await newExperience.save();
         console.log("Insert successful");
-        
+        */
     } catch (error) {
         console.error("Error when connecting to the database:", error);
     }
