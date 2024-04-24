@@ -15,17 +15,17 @@ app.use(express.json());
         await mongoose.connect("mongodb+srv://jeja2306:Vj5CmU06Op3zINNT@jeja.t13agrm.mongodb.net/");
         //await mongoose.connect("mongodb+srv://jeja2306:Vj5CmU06Op3zINNT@jeja2306-dt207g-moment3.x7zbafc.mongodb.net/cv");
         console.log("Connected to MongoDB...");
-        
+        /*
         const newExperience = new workExperience({
-            companyname: "test db two", 
-            jobtitle: "test db two", 
-            location: "test db two", 
-            description: "test db two"
+            companyname: "test db three", 
+            jobtitle: "test db three", 
+            location: "test db three", 
+            description: "test db three"
         });
-
+        
         await newExperience.save();
         console.log("Insert successful");
-        
+        */
     } catch (error) {
         console.error("Error when connecting to the database:", error);
     }
@@ -57,7 +57,7 @@ const schema = new mongoose.Schema({
 });
 
 // routes
-app.get("/cv", async (req, res) => {
+app.get("/", async (req, res) => {
     res.json({ message: "API för arbetserfarenheter" });
 });
 
@@ -65,7 +65,7 @@ app.get("/cv", async (req, res) => {
 const workExperience = mongoose.model("workexperiences", schema);
 
 // hitta innehåll
-app.get("/cv/workexperiences", async (req, res) => {
+app.get("/workexperiences", async (req, res) => {
     try {
         const result = await workExperience.find({});
         return res.json(result);
@@ -75,7 +75,7 @@ app.get("/cv/workexperiences", async (req, res) => {
 });
 
 // hitta specifikt innehåll
-app.get("/cv/workexperiences/:id", async (req, res) => {
+app.get("/workexperiences/:id", async (req, res) => {
     const id = req.params.id;
 
     try {
@@ -87,7 +87,7 @@ app.get("/cv/workexperiences/:id", async (req, res) => {
 });
 
 // lägga till data
-app.post("/cv/workexperiences", async (req, res) => {
+app.post("/workexperiences", async (req, res) => {
     try {
         const result = await workExperience.create(req.body);
         return res.json(result);
@@ -97,7 +97,7 @@ app.post("/cv/workexperiences", async (req, res) => {
 });
 
 // radera data
-app.delete("/cv/workexperiences/:id", async (req, res) => {
+app.delete("/workexperiences/:id", async (req, res) => {
     const id = req.params.id;
 
     try {
@@ -113,7 +113,7 @@ app.delete("/cv/workexperiences/:id", async (req, res) => {
 });
 
 // uppdatera befintlig
-app.put("/cv/workexperiences/:id", async (req, res) => {
+app.put("/workexperiences/:id", async (req, res) => {
     const id = req.params.id; // tar id frpn url och ger variabel
     const update = req.body; // tar uppdatering från body och ger variabel
 
