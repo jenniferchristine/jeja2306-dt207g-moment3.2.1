@@ -98,8 +98,8 @@ app.post("/workexperiences", async (req, res) => {
     } catch (error) {
         if (error.name === "ValidationError") { // kontrollerar valieringsfel
             const errors = {}; // vid valideringsfel skapas error
-            for (let field in error.errors) {
-                errors[field] = error.errors[field].message;
+            for (let field in error.errors) { // loopar över fält med valideringsfel
+                errors[field] = error.errors[field].message; // och lägger till felmeddelande
             }
             return res.status(400).json({ errors });
         }
