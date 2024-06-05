@@ -92,12 +92,12 @@ app.get("/workexperiences/:id", async (req, res) => {
 app.post("/workexperiences", async (req, res) => {
     try {
         const newWorkexperience = new workExperience(req.body);
-        await newWorkexperience.validate();
+        await newWorkexperience.validate(); // validerar mot mongoose schemat
         const result = await workExperience.create(req.body);
         return res.status(201).json(result);
     } catch (error) {
-        if (error.name === "ValidationError") {
-            const errors = {};
+        if (error.name === "ValidationError") { // kontrollerar valieringsfel
+            const errors = {}; // vid valideringsfel skapas error
             for (let field in error.errors) {
                 errors[field] = error.errors[field].message;
             }
