@@ -96,6 +96,13 @@ app.post("/workexperiences", async (req, res) => {
         const result = await workExperience.create(req.body);
         return res.status(201).json(result);
     } catch (error) {
+        if (error.name === "ValidationError") {
+            const errors = {};
+            for (let field in error.errors) {
+                errors[field] = error.errors[field].message;
+            }
+            return res.status(400).json({ errors });
+        }
         return res.status(400).json({ message: "Error adding data", error: error.message });
     }
 });
