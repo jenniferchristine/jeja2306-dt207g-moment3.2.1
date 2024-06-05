@@ -13,7 +13,6 @@ app.use(express.json());
 (async () => {
     try {
         await mongoose.connect("mongodb+srv://jeja2306:Vj5CmU06Op3zINNT@jeja.t13agrm.mongodb.net/");
-        //await mongoose.connect("mongodb+srv://jeja2306:Vj5CmU06Op3zINNT@jeja2306-dt207g-moment3.x7zbafc.mongodb.net/cv");
         console.log("Connected to MongoDB...");
         /*
         const newExperience = new workExperience({
@@ -52,7 +51,7 @@ const schema = new mongoose.Schema({
         type: String,
         required: [true, "Du måste ange en beskrivning av ditt arbete"],
         trim: true,
-        minlength: 10
+        minlength: [10, "Beskrivningen måste vara minst 10 tecken lång"]
     }
 });
 
@@ -70,7 +69,7 @@ app.get("/workexperiences", async (req, res) => {
         const result = await workExperience.find({});
         return res.json(result);
     } catch (error) {
-        return res.status(500).json(error);
+        return res.status(500).json({ messeage: "Error fetching data", error: error.message });
     }
 });
 
@@ -80,19 +79,24 @@ app.get("/workexperiences/:id", async (req, res) => {
 
     try {
         const result = await workExperience.findById(id);
-        return res.json(result);
+        if (!result) {
+        return res.status(404).json({ message: "Data not found" });
+        }
+        res.json(result);
     } catch (error) {
-        return res.status(500).json(error);
+        return res.status(500).json({ messeage: "Error fetching data", error: error.message });
     }
 });
 
 // lägga till data
 app.post("/workexperiences", async (req, res) => {
     try {
+        const newWorkexperience = new workExperience(req.body);
+        await newWorkexperience.validate();
         const result = await workExperience.create(req.body);
-        return res.json(result);
+        return res.status(201).json(result);
     } catch (error) {
-        return res.status(400).json(error);
+        return res.status(400).json({ message: "Error adding data", error: error.message });
     }
 });
 
@@ -103,12 +107,12 @@ app.delete("/workexperiences/:id", async (req, res) => {
     try {
         const deleteData = await workExperience.findByIdAndDelete(id);
         if (!deleteData) {
-            return res.status(404).json({ message: "Could not be deleted" });
+            return res.status(404).json({ message: "Data could not be deleted" });
         }
         res.json({ message: "Deleted succesfully", deleteData});
     } catch (error) {
         console.error("Error when deleting", error);
-        res.status(500).json({ message: "Error when deleting", error });
+        res.status(500).json({ message: "Error when deleting", error: error.message });
     }
 });
 
@@ -118,14 +122,14 @@ app.put("/workexperiences/:id", async (req, res) => {
     const update = req.body; // tar uppdatering från body och ger variabel
 
     try {
-        const result = await workExperience.findByIdAndUpdate(id, update, { new: true }); // returnen blir det uppdaterade
+        const result = await workExperience.findByIdAndUpdate(id, update, { new: true, runValidators: true }); // returnen blir det uppdaterade
         if (!result) {
             return res.status(404).json({ message: "Could not update data" });
         }
-        res.json({ message: "Updated succesfully", result});
+        res.json({ message: "Updated succesfully", result });
     } catch (error) {
         console.error("Error when updating", error);
-        res.status(500).json({ message: "Error when updating", error });
+        res.status(500).json({ message: "Error when updating", error: error.message });
     }
 });
 
