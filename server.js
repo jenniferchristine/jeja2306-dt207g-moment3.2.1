@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 
 // init express
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(express.json());
@@ -12,7 +12,7 @@ app.use(express.json());
 // självkörande funktion för att hantera anslutning
 (async () => {
     try {
-        await mongoose.connect("mongodb+srv://jeja2306:Vj5CmU06Op3zINNT@jeja.t13agrm.mongodb.net/");
+        await mongoose.connect("mongodb+srv://jeja2306:JejaMiun123@jeja.t13agrm.mongodb.net/");
         console.log("Connected to MongoDB...");
         /*
         const newExperience = new workExperience({
