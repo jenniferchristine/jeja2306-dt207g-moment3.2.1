@@ -16,16 +16,6 @@
 
 <br>
 
-| Database: cv | Collection: workexperience |
-|-----------------|-----------------|
-| id | SERIAL PRIMARY KEY NOT NULL |
-| companyname | VARCHAR(255) NOT NULL |
-| jobtitle | VARCHAR(255) NOT NULL |
-| location | VARCHAR(255) NOT NULL |
-| description | TEXT NOT NULL |
-
-<br>
-
 ### Användning av databas:
 
 <br>
@@ -55,3 +45,33 @@
     "__v": 0
 }
 ```
+
+<br>
+
+### Struktur av schema
+
+- **companyname**
+  - Type: String
+  - Required: Yes
+  - Error Message: "Du måste ange arbetsgivare"
+  - Trimmed: Yes
+
+- **jobtitle**
+  - Type: String
+  - Required: Yes
+  - Error Message: "Du måste ange en arbetsroll"
+  - Trimmed: Yes
+
+- **location**
+  - Type: String
+  - Required: Yes
+  - Error Message: "Du måste ange vart du arbetade"
+  - Trimmed: Yes
+
+- **description**
+  - Type: String
+  - Required: Yes
+  - Error Message: "Du måste ange en beskrivning av ditt arbete"
+  - Trimmed: Yes
+  - Minimum Length: 10 characters
+  - Error Message: "Beskrivningen måste vara minst 10 tecken lång"
